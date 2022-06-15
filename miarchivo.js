@@ -1,5 +1,6 @@
 let cantNotas = 0
 let sumaNotas = 0
+alert("Calcular Promedio")
 do{
     cantNotas= prompt("Ingrese la cantidad de notas");
 
