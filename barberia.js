@@ -1,13 +1,18 @@
 let ingDia = 0
 let ingHora = 0
+const corte = 700
+const cejas = 200
+const barba = 300
+const color = 1200
+
 
 function listaPrecios(){
-    alert(" Corte: 700$\n Corte + Cejas: 800$ \n Corte + Barba: 900$ \n Color: 1200$")
+    alert(" Corte: 700$\n Cejas: 200$ \n Barba: 300$ \n Color: 1200$")
     menuEntrada()
 }
 function continDia(){
     do {
-        ingDia = prompt ("Seleccione el dia que desea asistir \n 1 - Martes \n 2 - Miercoles \n 3 - Jueves \n 4 - Viernes \n 5 - Sabado:");
+        ingDia = prompt ("Seleccione el dia que desea asistir \n 1 - Martes \n 2 - Miercoles \n 3 - Jueves \n 4 - Viernes \n 5 - Sabado");
     }while(ingDia <=0)
     
 }
@@ -51,11 +56,47 @@ function menuEntrada(){
             break;
     }
 }
+
+function tipoDeServ(){
+    let tipo1 = prompt("Seleccione que servicio se realizara\n 1 - Corte\n 2 - Cejas\n 3 - Barba\n 4 - Color");
+    switch(tipo1){
+        case "1":
+            alert("Usted selecciono CORTE, el valor a pagar es de " + corte + "$")
+            break;
+        case "2":
+            alert("Usted selecciono CEJAS, el valor a pagar es de " + cejas + "$")
+            break;
+        case "3":
+            alert("Usted selecciono BARBA, el valor a pagar es de " + barba + "$")
+            break;
+        case "4":
+            alert("Usted selecciono COLOR, el valor a pagar es de " + color + "$")
+            break;
+        default:
+            break;
+    
+    }
+        
+}    
+function otroServ(){
+    let volver = 0
+    do{
+        volver = prompt("Desea seleccionar otro servicio?\n Ingrese s/n" );
+            if(volver == "n"){
+            alert("Gracias por solicitar su turno")
+            }else    
+                tipoDeServ()
+    }while(volver == "s")
+}
+
+
 function Turno(){
     menuEntrada()
     continHora()
-    selecTurno()    
+    selecTurno()
+    tipoDeServ()
+    otroServ()
 }
 
-alert("Bienvenido a la barberia \nEstamos de Martes a Sabados de 14 a 21 HS")
+alert("Bienvenido a la barberia \nAtendemos de Martes a Sabados de 14 a 21 HS")
 Turno()
