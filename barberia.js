@@ -3,6 +3,7 @@ let ingHora = 0
 
 function listaPrecios(){
     alert(" Corte: 700$\n Corte + Cejas: 800$ \n Corte + Barba: 900$ \n Color: 1200$")
+    menuEntrada()
 }
 function continDia(){
     do {
@@ -51,7 +52,6 @@ function menuEntrada(){
     }
 }
 function Turno(){
-    menuEntrada()
     menuEntrada()
     continHora()
     selecTurno()    
