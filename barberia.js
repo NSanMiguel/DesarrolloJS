@@ -1,8 +1,15 @@
 let ingDia = 0
+
 let ingHora = 0
+
+let total = 0
+
 const corte = 700
+
 const cejas = 200
+
 const barba = 300
+
 const color = 1200
 
 
@@ -61,16 +68,20 @@ function tipoDeServ(){
     let tipo1 = prompt("Seleccione que servicio se realizara\n 1 - Corte\n 2 - Cejas\n 3 - Barba\n 4 - Color");
     switch(tipo1){
         case "1":
-            alert("Usted selecciono CORTE, el valor a pagar es de " + corte + "$")
+            total += corte
+            alert("Usted selecciono CORTE, el total a pagar es de " + total + "$")
             break;
         case "2":
-            alert("Usted selecciono CEJAS, el valor a pagar es de " + cejas + "$")
+            total += cejas
+            alert("Usted selecciono CEJAS, el total a pagar es de " + total + "$")
             break;
         case "3":
-            alert("Usted selecciono BARBA, el valor a pagar es de " + barba + "$")
+            total += barba
+            alert("Usted selecciono BARBA, el total a pagar es de " + total + "$")
             break;
         case "4":
-            alert("Usted selecciono COLOR, el valor a pagar es de " + color + "$")
+            total += color
+            alert("Usted selecciono COLOR, el total a pagar es de " + total + "$")
             break;
         default:
             break;
