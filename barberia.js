@@ -4,14 +4,6 @@ let ingHora = 0
 
 let total = 0
 
-/*const corte = 700
-
-const cejas = 200
-
-const barba = 300
-
-const color = 1200
-*/
 const guardarDatos = []
 
 const servicios = []
@@ -106,66 +98,16 @@ function selecTurno(){
 }
 }
 
-
-
-function selectServicio (){
-    let elegirServicio =  prompt("Ingrese el servicio que desea: ")
-    if(elegirServicio == servicio.servicio){
-        alert("Usted selecciono " + servicio.servicio + "el valor a pagar es de " + servicio.precio)
-    }
-
-
-    
-}
-
-/*
-function tipoDeServ(){
-    let tipo1 = prompt(ingNombre + ", Seleccione que servicio se realizara\n 1 - Corte\n 2 - Cejas\n 3 - Barba\n 4 - Color")
-    switch(tipo1){
-        case "1":
-            total += corte
-            alert(ingNombre + ", Usted selecciono CORTE, el total a pagar es de " + total + "$")
-            break;
-        case "2":
-            total += cejas
-            alert(ingNombre + ", Usted selecciono CEJAS, el total a pagar es de " + total + "$")
-            break;
-        case "3":
-            total += barba
-            alert(ingNombre + ", Usted selecciono BARBA, el total a pagar es de " + total + "$")
-            break;
-        case "4":
-            total += color
-            alert(ingNombre + ", Usted selecciono COLOR, el total a pagar es de " + total + "$")
-            break;
-        default:
-            break;
-    
-    }
-        
-}    
-function otroServ(){
-    let volver = 0
-    do{
-        volver = prompt(ingNombre + ", Desea seleccionar otro servicio?\n Ingrese s/n" )
-            if(volver == "n"){
-            alert(ingNombre + ", Gracias por solicitar su turno")
-            }else    
-                tipoDeServ()
-    }while(volver == "s")
-}
-*/
-
 function Turno(){
     menuEntrada()
     continHora()
     selecTurno()
     alert("Servicios disponibles")
     mostrarServicio()
-    selectServicio()
-    //tipoDeServ()
-    //otroServ()
 }
 
 alert(ingNombre + ", Bienvenido a la barberia \nAtendemos de Martes a Sabados de 14 a 21 HS")
 Turno()
+alert(ingNombre + ", Gracias por solicitar su turno")
+
+
