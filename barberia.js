@@ -30,7 +30,7 @@ class tipoDeServicio {
     constructor (servicio, precio){
         this.servicio = servicio
         this.precio = precio
-}
+    }
 }
 
 servicios.push(new tipoDeServicio("Corte ",700))
@@ -95,7 +95,7 @@ function selecTurno(){
     default:
         alert(ingNombre + ", Seleccione un dia")
         break;
-}
+    }
 }
 
 function Turno(){
