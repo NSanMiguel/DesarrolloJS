@@ -5,7 +5,7 @@ let ingresarServicio
 
 let ingHora = 0
 
-let total = 0
+let selecEntrada
 
 const guardarDatos = []
 
@@ -26,17 +26,24 @@ let ingApellido = prompt("Ingrese su apellido: ")
 
 
 function menuEntrada(){
-    let selecEntrada= prompt(" 1 - Lista de precios \n 2 - Solicitar turno")
-    switch(selecEntrada){
-        case "1":
-            listaPrecios()
-            break;
-        case "2":
-            agregarCliente()
-            continDia()
-        default:
-            break;
-    }
+    do{
+        selecEntrada= prompt(" 1 - Lista de precios \n 2 - Solicitar turno")
+        switch(selecEntrada){
+            case "1":
+                listaPrecios()
+                break
+            case "2":
+                agregarCliente()
+                continDia()
+                break
+            default:
+                break
+        }
+        if(selecEntrada > 2){
+            alert("Seleccione la opcion correcta")
+            menuEntrada()
+        }
+    }while(selecEntrada <= 0)
 }
 
 function mostrarServicio(){
@@ -87,23 +94,22 @@ function selecTurno(){
     switch(ingDia){
     case "1":
         alert ( ingNombre + ", Su turno es el dia martes a las " + ingHora + " horas")
-
-        break;
+        break
     case "2":
         alert (ingNombre + ", Su turno es el dia miercoles a las " + ingHora + " horas")
-        break;
+        break
     case "3":
         alert (ingNombre + ", Su turno es el dia jueves a las " + ingHora + " horas")
-        break;
+        break
     case "4":
         alert (ingNombre + ", Su turno es el dia viernes a las " + ingHora + " horas")
-        break;
+        break
     case "5":
         alert (ingNombre + ", Su turno es el dia sabado a las " + ingHora + " horas")
-        break;
+        break
     default:
         alert(ingNombre + ", Seleccione un dia")
-        break;
+        break
     }
 }
 
@@ -116,17 +122,17 @@ class IngresarServicio {
 
 function selectServicio(){
     do {
-    seleccionarServicio = prompt("Seleccione el serivicio que desea: " + servicios2)
-    if(seleccionarServicio == "Corte"){
-        agregarServicios.push (new IngresarServicio (seleccionarServicio, 700))
-    }else if(seleccionarServicio == "Cejas"){
-        agregarServicios.push (new IngresarServicio (seleccionarServicio, 200))
-    }else if(seleccionarServicio == "Barba"){
-        agregarServicios.push (new IngresarServicio (seleccionarServicio, 300))
-    }else if(seleccionarServicio == "Color"){
-        agregarServicios.push (new IngresarServicio (seleccionarServicio, 1500))
-    }else
-        selectServicio()
+        seleccionarServicio = prompt("Seleccione el serivicio que desea: " + servicios2)
+        if(seleccionarServicio == "Corte"){
+            agregarServicios.push (new IngresarServicio (seleccionarServicio, 700))
+        }else if(seleccionarServicio == "Cejas"){
+            agregarServicios.push (new IngresarServicio (seleccionarServicio, 200))
+        }else if(seleccionarServicio == "Barba"){
+            agregarServicios.push (new IngresarServicio (seleccionarServicio, 300))
+        }else if(seleccionarServicio == "Color"){
+            agregarServicios.push (new IngresarServicio (seleccionarServicio, 1500))
+        }else
+            selectServicio()
     }while(seleccionarServicio <=0)
     otroServicio()
 }
@@ -162,6 +168,8 @@ function turno(){
 
 alert(ingNombre + ", Bienvenido a la barberia \nAtendemos de Martes a Sabados de 14 a 21 HS")
 turno()
+
+
 
 
 
