@@ -65,7 +65,7 @@ class NuevoCliente {
 }
 
 function agregarCliente(){
-    guardarDatos.push(new nuevoCliente(ingNombre,ingApellido))
+    guardarDatos.push(new NuevoCliente(ingNombre,ingApellido))
     console.log(guardarDatos)
 }
 
