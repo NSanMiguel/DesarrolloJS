@@ -57,7 +57,7 @@ function listaPrecios(){
     menuEntrada()
 }
 
-class nuevoCliente {
+class NuevoCliente {
     constructor (nombre,apellido){
         this.nombre = nombre.toUpperCase()
         this.apellido = apellido.toUpperCase()
