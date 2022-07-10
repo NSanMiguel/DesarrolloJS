@@ -29,9 +29,15 @@ function ingresarCliente(event){
     let hora = inputHorario.value
     let cliente = new Cliente (nombre,apellido,dia,hora)
     clientes.push(cliente)
+    formulario.reset()
     console.log(clientes)
     console.log(cliente)
 }
 
 formulario.onsubmit = (event) => ingresarCliente(event)
 
+inputHorario.addEventListener('keypress', (e) =>{
+    if(e.keyCode === 13){
+        ingresarCliente(event)
+    }
+})
