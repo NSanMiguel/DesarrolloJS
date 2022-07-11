@@ -10,8 +10,6 @@ let inputHorario = document.getElementById("inputHorario")
 
 let clientes = []
 
-
-
 class Cliente {
         constructor(nombre,apellido,dia,hora){
         this.nombre = nombre.toUpperCase()
@@ -38,6 +36,8 @@ formulario.onsubmit = (event) => ingresarCliente(event)
 
 inputHorario.addEventListener('keypress', (e) =>{
     if(e.keyCode === 13){
-        ingresarCliente(event)
-    }
+        if ((HTMLInputElement.hora < "14:00")||(HTMLInputElement.hora > "21:00")){
+                ingresarCliente(event)   
+        }
+    }    
 })
