@@ -38,46 +38,38 @@
                 <label class="form-label"> Horario </label> 
                 <input class="form-control" id="inputHorario" type="time" max="21:00:00" min="14:00:00"  required>
               </div>
-              <div>
                 <div class="mb-3">
                   <button type="submit" class="btn btn-dark" >Solicitar Turno</button>
                 </div>
-              </form>
-              <table id="tablaProductos" class="table table-striped table-hover">
-                <thead>
-                  <tr>
-                    <td>Nombre</td>
-                    <td>Apellido</td>
-                    <td>Dia</td>
-                    <td>Horario </td>
-                  </tr>
-                </thead>
+            </form>
+            <table id="tablaProductos" class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <td>Nombre</td>
+                  <td>Apellido</td>
+                  <td>Dia</td>
+                  <td>Horario </td>
+                </tr>
+              </thead>
               <tbody></tbody>
-              </table>
+            </table>
+            <label class="form-label"></label>
+            <div class="col-xxl-6" id="cards"> <h4>Servicios Disponibles: </h4>
+              <label class="form-label"> </label> 
             </div>
-              <label class="form-label"></label>
-              <div class="col-xxl-6" id="cards"> <h4>Servicios Disponibles: </h4>
-                <label class="form-label"> </label> 
-              </div>
-          <label class="form-label"></label> 
-              <div class="col-md-4">  
-              <button type="submit" class="btn btn-dark" id="mostrarTurno" >Mostrar Servicio Seleccionado </button>
-            </div>
-           
+             <label class="form-label"></label> 
+                <div class="col-md-4">  
+                  <button type="submit" class="btn btn-dark" id="mostrarTurno" >Mostrar Servicio Seleccionado </button>
+                </div>
             <label class="form-label">  </label> 
             <div class="card text-center">
               <div class="card" style="width: 18rem;">
                 <ul class="list-group list-group-flush" id="cardMostrar">
 
                 </ul>
-            </div>      
+              </div>      
             </div>
         </div>
-     
-        
- 
-      
-      
     </div>
   </div>
 </div>

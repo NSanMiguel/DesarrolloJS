@@ -22,10 +22,10 @@ let ingresarServicio = []
 
 class Cliente {
     constructor(nombre,apellido,dia,hora){
-    this.nombre = nombre.toUpperCase()
-    this.apellido = apellido.toUpperCase()
-    this.dia = dia.toUpperCase()
-    this.hora = hora
+        this.nombre = nombre.toUpperCase()
+        this.apellido = apellido.toUpperCase()
+        this.dia = dia.toUpperCase()
+        this.hora = hora
     }
 }
 
@@ -71,12 +71,12 @@ function agregarServicio(){
 function crearCard (servicio){
     let agregarCard = `
     <div class="row">
-    <div class="col-sm-6">
-    <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">${servicio.tipoDeServicio}</h5>
-      <p class="card-text">$ ${servicio.precio}</p>
-      <a href="#" class="btn btn-dark botonDeServicio" id="${servicio.id}">Seleccionar servicio</a>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">${servicio.tipoDeServicio}</h5>
+                    <p class="card-text">$ ${servicio.precio}</p>
+                    <a href="#" class="btn btn-dark botonDeServicio" id="${servicio.id}">Seleccionar servicio</a>
     </div>`
     return agregarCard
 }
@@ -167,14 +167,12 @@ function botonAddServicio(){
     })
 }
 
-
 function obtenerStorageDeServicio(){
     let servicioGuardado = localStorage.getItem("servicioSeleccionado")
     if(servicioGuardado !== null){
         nuevoServicio = JSON.parse(servicioGuardado)
     }
 }
-
 
 function main(){
     inicializarElementosHTML()
@@ -183,7 +181,6 @@ function main(){
     agregarServicio()
     iniciarCard()
     botonAddServicio()
-    
 }
 
 main()
