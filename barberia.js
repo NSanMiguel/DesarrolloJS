@@ -1,3 +1,5 @@
+// BARBER SUR //
+// Declaracion de variables //
 let formulario
 let inputNombre
 let inputApellido
@@ -8,8 +10,12 @@ let divCard
 let servicioButton
 let nuevoServicio
 let botonMostrarTurno
-let cardMostrar
+let servicioConfirmado
+let nuevaColumna
+let confirmarTurno
+let asignarTurnoConfirmado
 
+// Declaracion de arrays //
 const dias = ["Martes",
 "Miercoles",
 "Jueves",
@@ -20,6 +26,7 @@ let clientes = []
 
 let ingresarServicio = []
 
+// Declaracion de objetos //
 class Cliente {
     constructor(nombre,apellido,dia,hora){
         this.nombre = nombre.toUpperCase()
@@ -44,6 +51,15 @@ class ServicioSeleccionado {
     }
 }
 
+// Declaracion de Funciones //
+function mensajeDeBienvenida(){
+    Swal.fire(
+        'Bienvenido a BARBER SUR',
+        'Presione OK para realizar su solicitud',
+        'info'
+      )
+}
+
 function inicializarElementosHTML (){
     formulario = document.getElementById("formulario")
     inputNombre = document.getElementById("inputNombre")
@@ -53,7 +69,10 @@ function inicializarElementosHTML (){
     tabla = document.getElementById("tablaProductos")
     divCard = document.getElementById("cards")
     botonMostrarTurno = document.getElementById("mostrarTurno")
-    cardMostrar = document.getElementById("cardMostrar")
+    servicioConfirmado = document.getElementById("servicioConfirmado")
+    confirmarTurno = document.getElementById("confirmarTurno")
+    asignarTurnoConfirmado = document.getElementById("turnoConfirmado")
+
 }
 
 function agregarServicio(){
@@ -77,25 +96,8 @@ function crearCard (servicio){
                     <h5 class="card-title">${servicio.tipoDeServicio}</h5>
                     <p class="card-text">$ ${servicio.precio}</p>
                     <a href="#" class="btn btn-dark botonDeServicio" id="${servicio.id}">Seleccionar servicio</a>
-    </div>`
+                    </div> `
     return agregarCard
-}
-
-function iniciarCard(){
-    ingresarServicio.forEach(servicio =>{
-        divCard.innerHTML += crearCard(servicio)
-    })
-}
-
-function iniciarCardMostrar(){
-    nuevoServicio.servicio.forEach(servicio => {
-        let agregarCard = document.createElement("div")
-        agregarCard.innerHTML =`
-        <li class="list-group-item">Servicio: ${servicio.tipoDeServicio}</li>
-        <li class="list-group-item">Precio: ${servicio.precio}</li>
-       `
-        cardMostrar.appendChild(agregarCard)
-    })
 }
 
 function ingresarCliente(event){
@@ -109,22 +111,9 @@ function ingresarCliente(event){
     formulario.reset()
     localStorage.setItem("listaDeTurnos", JSON.stringify(clientes))
     console.log(clientes)
+    renovarStorage()
     limpiarTabla()
     agregarTabla()
-}
-
-function agregarDias(opcion){
-    for ( let index=0; index < dias.length; index++){
-        opcion = document.createElement('option')
-        opcion.innerHTML += `<option value='${index}' required>${dias[index]}</option>`
-        inputDia.appendChild(opcion)
-    }
-}
-
-function iniciarEventos(){
-    agregarDias()
-    formulario.onsubmit = (event) => ingresarCliente(event)
-    botonMostrarTurno.onclick = (event) => iniciarCardMostrar(event)
 }
 
 function agregarTabla (){
@@ -146,11 +135,10 @@ function limpiarTabla() {
     }
   }
 
-function obtenerStorage(){
-    let turnoGuardado = localStorage.getItem("listaDeTurnos")
-    if(turnoGuardado !== null){
-        clientes = JSON.parse(turnoGuardado)
-    }
+function iniciarCard(){
+    ingresarServicio.forEach(servicio =>{
+        divCard.innerHTML += crearCard(servicio)
+    })
 }
 
 function botonAddServicio(){
@@ -161,20 +149,132 @@ function botonAddServicio(){
         boton.addEventListener("click", (e) => {
             let eleccionDeServicio = ingresarServicio.find(servicio => servicio.id == e.target.id)
             nuevoServicio.servicio.push(eleccionDeServicio)
-            console.log(nuevoServicio)
             localStorage.setItem("listaDeServicios", JSON.stringify(nuevoServicio))
+            toastAgregarServicio()
         })
     })
 }
 
-function obtenerStorageDeServicio(){
-    let servicioGuardado = localStorage.getItem("servicioSeleccionado")
-    if(servicioGuardado !== null){
-        nuevoServicio = JSON.parse(servicioGuardado)
+function crearCardConfirmado(mostrarConfirmacion){
+    let agregarCard= `
+    <div class="card-header"><b> Su turno es: </b></div>
+        <div class="card-body">
+            <h5 class="card-title">${mostrarConfirmacion.dia} 
+            ${mostrarConfirmacion.hora} HS
+            </h5>
+            <p class="card-text">
+              <b> Nombre: </b> ${mostrarConfirmacion.nombre} </br>
+              <b> Apellido: </b>  ${mostrarConfirmacion.apellido}    
+            </p>
+        </div>
+    </div>
+    `
+    return agregarCard
+}
+
+function mostrarTurnoConfirmado(){
+    clientes.forEach(cliente => {
+        asignarTurnoConfirmado.innerHTML += crearCardConfirmado(cliente)
+    });
+}
+
+function crearCardServicioConfirmado(confirmacionDeServicio){
+    let agregarCard= `
+    <div class="card-header"><b> BARBER SUR </b></div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Servicio seleccionado: ${confirmacionDeServicio.tipoDeServicio} 
+            <p class="card-text">
+                Precio: $ ${confirmacionDeServicio.precio}  
+            </p>
+        </div>
+    </div>
+    `
+    return agregarCard
+}
+
+function iniciarCardMostrar(){
+    limpiarCard()
+    nuevoServicio.servicio.forEach(servicio=>{
+        servicioConfirmado.innerHTML += crearCardServicioConfirmado(servicio)
+    })
+    
+}
+
+function toastAgregarServicio(){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 5000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Servicio seleccionado'
+      })
+}
+
+function turnoConfirmado(){
+    Swal.fire(
+        'Su turno fue confirmado',
+        'Gracias por elegir BARBER SUR, presione OK para visualizar el comprobante',
+        'success'
+      )
+    mostrarTurnoConfirmado()
+    
+}
+
+function renovarStorage() {
+    localStorage.removeItem("listaDeServicios"); 
+    localStorage.setItem("listaDeServicios", JSON.stringify(nuevoServicio));
+}
+
+function limpiarCard() {
+    let cardLimpiar = document.getElementById("servicioConfirmado");
+    cardLimpiar.innerHTML = "";
+}
+
+function agregarDias(opcion){
+    for ( let index=0; index < dias.length; index++){
+        opcion = document.createElement('option')
+        opcion.innerHTML += `<option value='${index}' required>${dias[index]}</option>`
+        inputDia.appendChild(opcion)
+    }
+}
+
+function mensajeDeHorario(){
+    Swal.fire({
+        position: 'top-end',
+        icon: 'info',
+        title: 'Nuestro horario de atencion es de 14 HS a 21 HS',
+        showConfirmButton: false,
+        timer: 1500
+      })
+}
+
+function iniciarEventos(){
+    agregarDias()
+    formulario.onsubmit = (event) => ingresarCliente(event)
+    botonMostrarTurno.onclick = (event) => iniciarCardMostrar(event)
+    confirmarTurno.onclick = (event) => turnoConfirmado(event)
+    inputHorario.onclick = (event) => mensajeDeHorario(event)
+    }
+
+function obtenerStorage(){
+    let turnoGuardado = localStorage.getItem("listaDeTurnos")
+    if(turnoGuardado !== null){
+        clientes = JSON.parse(turnoGuardado)
     }
 }
 
 function main(){
+    mensajeDeBienvenida()
     inicializarElementosHTML()
     iniciarEventos()
     agregarTabla()
@@ -183,4 +283,5 @@ function main(){
     botonAddServicio()
 }
 
+//Programa principal//
 main()
