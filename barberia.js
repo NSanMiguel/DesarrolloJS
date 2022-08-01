@@ -14,6 +14,8 @@ let servicioConfirmado
 let nuevaColumna
 let confirmarTurno
 let asignarTurnoConfirmado
+let mostrarTotal
+let arrayDeBotones
 
 // Declaracion de arrays //
 const dias = ["Martes",
@@ -23,8 +25,6 @@ const dias = ["Martes",
 "Sabado"]
 
 let clientes = []
-
-let ingresarServicio = []
 
 // Declaracion de objetos //
 class Cliente {
@@ -49,6 +49,13 @@ class ServicioSeleccionado {
         this.id = id
         this.servicio = []
     }
+    calcularTotal () {
+        let total = 0
+        for (let i = 0; i < this.servicio.length ; i++ ){
+            total += this.servicio[i].precio
+        }
+        return total
+    }    
 }
 
 // Declaracion de Funciones //
@@ -68,23 +75,20 @@ function inicializarElementosHTML (){
     inputHorario = document.getElementById("inputHorario")
     tabla = document.getElementById("tablaProductos")
     divCard = document.getElementById("cards")
-    botonMostrarTurno = document.getElementById("mostrarTurno")
+    botonMostrarServicio = document.getElementById("mostrarServicio")
     servicioConfirmado = document.getElementById("servicioConfirmado")
     confirmarTurno = document.getElementById("confirmarTurno")
     asignarTurnoConfirmado = document.getElementById("turnoConfirmado")
-
 }
 
-function agregarServicio(){
-    let servicioCorte = new Servicios (1,"Corte",800)
-    let servicioBarba = new Servicios (2,"Barba",300)
-    let servicioCejas = new Servicios (3,"Cejas",200)
-    let servicioColor = new Servicios (4,"Color",1200)
-    ingresarServicio.push(servicioCorte)
-    ingresarServicio.push(servicioBarba)
-    ingresarServicio.push(servicioCejas)
-    ingresarServicio.push(servicioColor)
-    console.log(ingresarServicio)
+async function serviciosDisponibles(){
+    response = await fetch("/serviciosDisponibles.json")
+    data = await response.json()
+    console.log(data)
+    data.forEach(servicio =>{
+        divCard.innerHTML += crearCard(servicio)
+    })
+    botonAddServicio()
 }
 
 function crearCard (servicio){
@@ -108,7 +112,6 @@ function ingresarCliente(event){
     let hora = inputHorario.value
     let nuevoCliente = new Cliente (nombre,apellido,dia,hora)
     clientes.push(nuevoCliente)
-    formulario.reset()
     localStorage.setItem("listaDeTurnos", JSON.stringify(clientes))
     console.log(clientes)
     renovarStorage()
@@ -135,27 +138,29 @@ function limpiarTabla() {
     }
   }
 
-function iniciarCard(){
-    ingresarServicio.forEach(servicio =>{
-        divCard.innerHTML += crearCard(servicio)
-    })
-}
-
 function botonAddServicio(){
     servicioButton = document.querySelectorAll(".botonDeServicio")
     nuevoServicio = new ServicioSeleccionado(1)
-    let arrayDeBotones = Array.from(servicioButton)
+    arrayDeBotones = Array.from(servicioButton)
     arrayDeBotones.forEach(boton =>{
         boton.addEventListener("click", (e) => {
-            let eleccionDeServicio = ingresarServicio.find(servicio => servicio.id == e.target.id)
+            let eleccionDeServicio = data.find(servicio => servicio.id == e.target.id)
             nuevoServicio.servicio.push(eleccionDeServicio)
             localStorage.setItem("listaDeServicios", JSON.stringify(nuevoServicio))
             toastAgregarServicio()
+            limpiarCard()
+            agregarServicio()
         })
     })
 }
 
-function crearCardConfirmado(mostrarConfirmacion){
+function agregarServicio(){
+    nuevoServicio.servicio.forEach(servicio=>{
+        servicioConfirmado.innerHTML += crearCardServicioConfirmado(servicio)
+})
+}
+
+function crearCardTurnoConfirmado(mostrarConfirmacion){
     let agregarCard= `
     <div class="card-header"><b> Su turno es: </b></div>
         <div class="card-body">
@@ -174,9 +179,14 @@ function crearCardConfirmado(mostrarConfirmacion){
 
 function mostrarTurnoConfirmado(){
     clientes.forEach(cliente => {
-        asignarTurnoConfirmado.innerHTML += crearCardConfirmado(cliente)
-    });
+        asignarTurnoConfirmado.innerHTML += crearCardTurnoConfirmado(cliente)
+    })
+    mostrarTotal = document.createElement("div")
+    mostrarTotal.innerHTML += `<div><h4> El total a pagar es: $ ${nuevoServicio.calcularTotal()} </h4></div>`
+    mostrarTotal.className = "card"
+    document.body.appendChild(mostrarTotal)
 }
+
 
 function crearCardServicioConfirmado(confirmacionDeServicio){
     let agregarCard= `
@@ -185,20 +195,12 @@ function crearCardServicioConfirmado(confirmacionDeServicio){
             <h5 class="card-title">
                 Servicio seleccionado: ${confirmacionDeServicio.tipoDeServicio} 
             <p class="card-text">
-                Precio: $ ${confirmacionDeServicio.precio}  
+                Precio: $ ${confirmacionDeServicio.precio}
             </p>
         </div>
     </div>
     `
     return agregarCard
-}
-
-function iniciarCardMostrar(){
-    limpiarCard()
-    nuevoServicio.servicio.forEach(servicio=>{
-        servicioConfirmado.innerHTML += crearCardServicioConfirmado(servicio)
-    })
-    
 }
 
 function toastAgregarServicio(){
@@ -221,13 +223,14 @@ function toastAgregarServicio(){
 }
 
 function turnoConfirmado(){
-    Swal.fire(
+    let chequearTurno = (clientes.length === 0) ? true : false
+    chequearTurno ? error() : Swal.fire(
         'Su turno fue confirmado',
         'Gracias por elegir BARBER SUR, presione OK para visualizar el comprobante',
         'success'
       )
     mostrarTurnoConfirmado()
-    
+    formulario.reset()
 }
 
 function renovarStorage() {
@@ -261,7 +264,6 @@ function mensajeDeHorario(){
 function iniciarEventos(){
     agregarDias()
     formulario.onsubmit = (event) => ingresarCliente(event)
-    botonMostrarTurno.onclick = (event) => iniciarCardMostrar(event)
     confirmarTurno.onclick = (event) => turnoConfirmado(event)
     inputHorario.onclick = (event) => mensajeDeHorario(event)
     }
@@ -273,14 +275,20 @@ function obtenerStorage(){
     }
 }
 
+function error (){
+    Swal.fire({
+        icon: 'error',
+        title: 'ERROR...',
+        text: 'Debe ingresar su turno',
+      })
+}
+
 function main(){
     mensajeDeBienvenida()
     inicializarElementosHTML()
     iniciarEventos()
     agregarTabla()
-    agregarServicio()
-    iniciarCard()
-    botonAddServicio()
+    serviciosDisponibles()
 }
 
 //Programa principal//

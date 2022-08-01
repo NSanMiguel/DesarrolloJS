@@ -1,0 +1,22 @@
+[
+{
+    "id": 1,
+    "tipoDeServicio": "Corte",
+    "precio": 800
+},
+{
+    "id": 2,
+    "tipoDeServicio": "Barba",
+    "precio": 300
+},
+{
+    "id": 3,
+    "tipoDeServicio": "Cejas",
+    "precio": 200
+},
+{
+    "id": 4,
+    "tipoDeServicio": "Color",
+    "precio": 1200
+}
+]
