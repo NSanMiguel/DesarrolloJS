@@ -16,6 +16,7 @@ let confirmarTurno
 let asignarTurnoConfirmado
 let mostrarTotal
 let arrayDeBotones
+let botonSubmit
 
 // Declaracion de arrays //
 const dias = ["Martes",
@@ -82,7 +83,7 @@ function inicializarElementosHTML (){
 }
 
 async function serviciosDisponibles(){
-    response = await fetch("/serviciosDisponibles.json")
+    response = await fetch("./serviciosDisponibles.json")
     data = await response.json()
     console.log(data)
     data.forEach(servicio =>{
@@ -177,7 +178,20 @@ function crearCardTurnoConfirmado(mostrarConfirmacion){
     return agregarCard
 }
 
+function desactivarFormulario(){
+    botonSubmit.disabled = true
+    inputApellido.disabled = true
+    inputDia.disabled = true
+    inputHorario.disabled = true
+    inputNombre.disabled = true
+}
+
 function mostrarTurnoConfirmado(){
+    Swal.fire(
+        'Su turno fue confirmado',
+        'Gracias por elegir BARBER SUR, presione OK para visualizar el comprobante',
+        'success'
+      )
     clientes.forEach(cliente => {
         asignarTurnoConfirmado.innerHTML += crearCardTurnoConfirmado(cliente)
     })
@@ -185,8 +199,11 @@ function mostrarTurnoConfirmado(){
     mostrarTotal.innerHTML += `<div><h4> El total a pagar es: $ ${nuevoServicio.calcularTotal()} </h4></div>`
     mostrarTotal.className = "card"
     document.body.appendChild(mostrarTotal)
+    botonSubmit = document.getElementById("botonSubmit")
+    formulario.reset()
+    divCard.remove()
+    desactivarFormulario()
 }
-
 
 function crearCardServicioConfirmado(confirmacionDeServicio){
     let agregarCard= `
@@ -224,13 +241,7 @@ function toastAgregarServicio(){
 
 function turnoConfirmado(){
     let chequearTurno = (clientes.length === 0) ? true : false
-    chequearTurno ? error() : Swal.fire(
-        'Su turno fue confirmado',
-        'Gracias por elegir BARBER SUR, presione OK para visualizar el comprobante',
-        'success'
-      )
-    mostrarTurnoConfirmado()
-    formulario.reset()
+    chequearTurno ? error() : mostrarTurnoConfirmado()
 }
 
 function renovarStorage() {
