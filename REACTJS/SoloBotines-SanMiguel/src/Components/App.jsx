@@ -1,11 +1,15 @@
 import './App.css';
+import { ItemListContainer } from './ItemListContainer/ItemListContainer';
+import {NavBar} from './NavBar/NavBar';
 
-function App() {
+export function App() {
   return (
+    
     <div className="App">
-      <h3> Bienvenido a SOLO BOTINES</h3>
+      <NavBar/>
+      <ItemListContainer greetings="Rompela en la cancha con SOLO BOTINES"/>
     </div>
   );
 }
 
-export default App;
+
