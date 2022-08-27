@@ -1,6 +1,9 @@
-export function ItemListContainer(props){
+import { ItemCount } from "../ItemCount/ItemCount"
+export function ItemListContainer(){
+    function onAdd(contador){
+        console.log(`Se agregaron ${contador} par/es de botines`);
+    }
     return(
-        <h3> {props.greetings} </h3>
-
+        <ItemCount stock={6} onAdd={onAdd}/>
     )
 }
