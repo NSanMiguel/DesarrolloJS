@@ -5,9 +5,9 @@ import {NavBar} from './NavBar/NavBar';
 export function App() {
   return (
     
-    <div className="App">
+    <div className="div1">
       <NavBar/>
-      <ItemListContainer greetings="Rompela en la cancha con SOLO BOTINES"/>
+      <ItemListContainer/>
     </div>
   );
 }
