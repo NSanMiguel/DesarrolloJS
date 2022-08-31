@@ -5,7 +5,7 @@ import './NavBar.css'
 export function NavBar (){
 
   return(
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav className="navbar   navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <img src="./image/solobotineslog.jpeg" className="icon"></img>
           <div className="collapse navbar-collapse" id="navbarColor01">

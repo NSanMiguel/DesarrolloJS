@@ -7,7 +7,7 @@ export function MenuDesplegable(){
                     role="button"
                     aria-haspopup="true"
                     aria-expanded="false">Marcas</a>
-          <div className="dropdown-menu bg-primary">
+          <div className="dropdown-menu bg-dark">
                 <a className="dropdown-item text-white" href="#">Adidas</a>
                 <a className="dropdown-item text-white" href="#">Nike</a>
                 <a className="dropdown-item text-white" href="#">Puma</a>

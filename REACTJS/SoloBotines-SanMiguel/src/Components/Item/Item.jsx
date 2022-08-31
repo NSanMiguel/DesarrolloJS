@@ -3,7 +3,7 @@ import './item.css'
 
 export const Item = ({botines}) =>{
     return(
-        <div className="card text-white bg-primary cards" >
+        <div className="card text-white bg-dark cards" >
                 <div className="card-header">SOLO BOTINES</div>
                 <img src={botines.image} className="card-img-top" alt={botines.marca}></img>
                     <div className="card-body">
