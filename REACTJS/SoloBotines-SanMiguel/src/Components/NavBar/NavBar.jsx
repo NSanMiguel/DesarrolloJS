@@ -5,7 +5,7 @@ import './NavBar.css'
 export function NavBar (){
 
   return(
-    <nav className="navbar   navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark ">
       <div className="container-fluid">
         <img src="./image/solobotineslog.jpeg" className="icon"></img>
           <div className="collapse navbar-collapse" id="navbarColor01">
@@ -17,6 +17,7 @@ export function NavBar (){
           <CartWidget/>
       </div>
     </nav>
+
 
   )
 }
