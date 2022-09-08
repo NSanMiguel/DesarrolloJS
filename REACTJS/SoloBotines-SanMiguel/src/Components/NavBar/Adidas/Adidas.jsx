@@ -1,10 +1,10 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import "../NavBar.css"
-export function Inicio(){
+
+export function Adidas(){
     return (
         <li className=" nav-item">
-            <Link className=" nav-link" to={"/"}> Inicio </Link>
+            <Link className="nav-link"to={"/category/Adidas"}> Adidas </Link>
         </li>
     )
 }

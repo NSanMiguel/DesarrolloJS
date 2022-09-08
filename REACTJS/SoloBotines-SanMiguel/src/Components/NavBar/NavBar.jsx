@@ -1,23 +1,25 @@
-import { MenuDesplegable } from "./MenuDesplegable/MenuDesplegable";
+import { Adidas } from "./Adidas/Adidas";
 import {Inicio} from "./Inicio/Inicio"
 import { CartWidget } from "./CartWidget/CartWidget";
+import {Icono} from "./Icono/Icono"
+import { Nike } from "../Nike/Nike";
+import { Puma } from "../Puma/Puma";
 import './NavBar.css'
 export function NavBar (){
 
   return(
     <nav className="navbar navbar-expand-lg navbar-dark ">
-      <div className="container-fluid">
-        <img src="./image/solobotineslog.jpeg" className="icon"></img>
-          <div className="collapse navbar-collapse" id="navbarColor01">
-            <ul className="navbar-nav me-auto">
+            <Icono/>
+            <ul className="navbar-nav me-auto"> 
+              <div className="navbar-nav">
               <Inicio/>
-              <MenuDesplegable/>
+              <Adidas/>
+              <Nike/>
+              <Puma/>
+              </div>
             </ul>
-          </div>
           <CartWidget/>
-      </div>
-    </nav>
-
+          </nav>
 
   )
 }

@@ -2,29 +2,32 @@
 import React, {useEffect,useState} from "react"
 import { ItemList } from "../ItemList/ItemList"
 import { botinesData } from "../botinesData"
+import { useParams } from "react-router-dom"
 
 export const  ItemListContainer = () =>     {
-    /*function onAdd(contador){
-        console.log(`Se agregaron ${contador} par/es de botines`);
-    }*/
     const [botines, setBotines] = useState([])
-    //const [cargando,setCargando] = useState(true)
+    const [cargando,setCargando] = useState(true)
+
+    const {marca} = useParams()
+    console.log(marca)
 
     useEffect(()=>{
         const dataBotines = new Promise ((res,rej)=> {
-            setTimeout(() => {
-                res(botinesData)
-                rej("error")
-            }, 2000);
+            if(marca){
+                setTimeout(() => res(botinesData.filter(botin => botin.marca === marca))
+                , 2000);
+            }else{
+                setTimeout(() => res(botinesData)
+                , 2000);
+            }
         })
-        dataBotines.then((res)=> (setBotines(res)))
-        //, setCargando(false)
+        dataBotines.then((res)=> {setBotines(res) 
+            setCargando(false)})
         .catch((err)=> console.log(err))
 
-    },[])
+    },[marca])
 
     return (
-    <ItemList list={botines}/>
+     cargando ? <h1> Cargando ... </h1> : <ItemList list={botines}/>
     )
-        //<ItemCount stock={6} onAdd={onAdd}/>
 }

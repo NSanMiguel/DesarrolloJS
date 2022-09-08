@@ -1,10 +1,9 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import "../NavBar.css"
-export function Inicio(){
+export function Puma(){
     return (
         <li className=" nav-item">
-            <Link className=" nav-link" to={"/"}> Inicio </Link>
+            <Link className=" nav-link" to={"/category/Puma"}> Puma </Link>
         </li>
     )
 }

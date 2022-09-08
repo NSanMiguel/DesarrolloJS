@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import './item.css'
 
 export const Item = ({botines}) =>{
@@ -7,7 +8,9 @@ export const Item = ({botines}) =>{
         <div className="card w-25 cards" >
                     <img src={image} className="card-img-top img" alt={marca}></img>
                             <p className="card-text font cardtext">{marca} {modelo}<br/>${precio}</p> 
-                            <button className=" button"> Ver detalles</button>
+                            <Link className="nav-link" to={`/detalles/${id}`}>
+                            <button className=" button"> Ver Botin</button>
+                            </Link>
                         </div>
     )
 }
