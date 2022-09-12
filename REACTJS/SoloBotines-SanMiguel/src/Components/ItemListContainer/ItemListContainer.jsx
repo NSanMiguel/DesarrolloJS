@@ -9,7 +9,7 @@ export const  ItemListContainer = () =>     {
     const [cargando,setCargando] = useState(true)
 
     const {marca} = useParams()
-    console.log(marca)
+    
 
     useEffect(()=>{
         const dataBotines = new Promise ((res,rej)=> {

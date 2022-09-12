@@ -5,7 +5,7 @@ export const botinesData =
       marca : "Adidas", 
       modelo : "Predator Edge.3", 
       stock : 5,
-      detalles : "Su diseño con una parte superior Control Zone con paneles estampados en zonas estratégicas que favorecen un mejor control de la pelota, panel reforzado en el tobillo y sola de goma estriada para mejorar el agarre a la superficie, hará que te conviertas en la estrella del partido.", 
+      detalles : "Su diseño con una parte superior Control Zone con paneles estampados en zonas estratégicas que favorecen un mejor control de la pelota, panel reforzado en el tobillo y suela de goma estriada para mejorar el agarre a la superficie, hará que te conviertas en la estrella del partido.", 
       precio : 25000, 
       image :"../image/AdidasPredator.jpeg"
     },

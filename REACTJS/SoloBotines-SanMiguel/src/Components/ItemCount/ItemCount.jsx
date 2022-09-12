@@ -1,21 +1,16 @@
 import React,{useState} from 'react'
 import './ItemCount.css'
-export function ItemCount({botines}) {
-    const [cantidad, setCantidad] = useState(1)
-
-    const agregarAlCarrito = (botines,cantidad) =>{
-        const botinesCarrito = {id: botines.id, cantidad: cantidad}
-        console.log(botinesCarrito)
-    }
+export function ItemCount({stock,initial,onAdd}) {
+    const [count, setCount] = useState(initial)
 
     const cantidadBotines = (operar) => {
-        if (operar == "+"){
-            if(cantidad < botines.stock){
-                setCantidad(cantidad + 1)
+        if (operar === "+"){
+            if(count < stock){
+                setCount(count + 1)
             }
         }else{
-            if (cantidad > 1){
-                setCantidad(cantidad - 1)
+            if (count > initial){
+                setCount(count - 1)
             }
         }
     }
@@ -24,12 +19,12 @@ export function ItemCount({botines}) {
       <div>
         <div className='card-btn'>
             <p className="stock">
-                {cantidad}
+                {count}
             </p>
             <button className="btn btn-outline-danger text-white " onClick={() => cantidadBotines ("+") }> + </button> 
             <button className="btn btn-outline-danger text-white"  onClick={() => cantidadBotines ("-")}> - </button>
         </div>
-            <button className='btn btn-danger ' onClick={() => agregarAlCarrito(botines,cantidad)}> Comprar </button>
+            <button className='btn btn-danger ' onClick={() => onAdd(count) }> Agregar al Carrito </button>
         </div>
     )
 }
