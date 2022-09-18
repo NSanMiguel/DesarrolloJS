@@ -6,8 +6,8 @@ export const ItemList = ({list}) =>{
     return(
         <div className="cardgeneral">
             <div className="row segundacard">
-            {list.map((botin,indice) =>(
-                <Item botines={botin} key={indice}/>
+            {list.map((botin) =>(
+                <Item botines={botin} key={botin.id}/>
             ))}
         </div>
         </div>

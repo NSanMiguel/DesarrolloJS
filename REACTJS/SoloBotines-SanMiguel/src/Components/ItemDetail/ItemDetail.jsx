@@ -8,7 +8,7 @@ import './ItemDetail.css';
 export const ItemDetail = ({item})=>{
     const [cantidad, setCantidad] = useState(0)
     const {image,marca,modelo,precio,stock,detalles,id} = item
-    const {cart,addItem} = useContext(CartContext);
+    const {addItem} = useContext(CartContext);
 
     const onAdd = (cant) =>{
         const botinesCarrito  = 
@@ -22,7 +22,6 @@ export const ItemDetail = ({item})=>{
         }
         setCantidad(cant)
         addItem(botinesCarrito)
-        console.log(cart)
     }
     return(
 

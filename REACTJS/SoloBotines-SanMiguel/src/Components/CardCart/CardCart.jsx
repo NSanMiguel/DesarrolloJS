@@ -3,24 +3,23 @@ import { CartContext } from '../../Context/CartContext';
 import  './CardCart.css'
 
 export const CardCart = ({cart}) => {
-    const {image,marca,modelo,precio,cantidad,id} = cart
-    const {removeItem,clearAll} = useContext(CartContext)
-
-
+    const {removeItem} = useContext(CartContext)
+    
     return (
-        
+        <>
         <div className="card" style={{ width: "18rem" }}>
-                <img className="card-img-top" src={image} alt={image} />
+                <img className="card-img-top" src={cart.botin.image} alt={cart.image} />
                 <div className="card-body">
-                    <p className="card-text">{marca} {modelo}</p>
-                    <p className="card-text">$ {precio}</p>
-                    <p className="card-text">Cantidad: {cantidad}</p>
+                    <p className="card-text">{cart.botin.marca} {cart.botin.modelo}</p>
+                    <p className="card-text">$ {cart.botin.precio}</p>
+                    <p className="card-text">Cantidad: {cart.botin.cantidad}</p>
                 </div>
                 <div >
-                <button className='botonEliminar' onClick={() => removeItem({id})}>Eliminar Producto</button>
-                <button className='botonEliminar' onClick={() => clearAll()}>Vaciar Carrito</button>
+                <button className='botonEliminar' onClick={() => removeItem(cart.botin.id)}>Eliminar Producto</button>
+                
                 </div>
         </div>
+        </>
     );
 }
 

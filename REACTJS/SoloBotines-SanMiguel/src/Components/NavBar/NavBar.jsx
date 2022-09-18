@@ -18,7 +18,7 @@ export function NavBar (){
               <Puma/>
               </div>
             </ul>
-          <CartWidget/>
+            <CartWidget/>
           </nav>
 
   )
