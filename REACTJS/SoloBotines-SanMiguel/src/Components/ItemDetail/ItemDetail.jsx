@@ -6,7 +6,7 @@ import './ItemDetail.css';
 
 
 export const ItemDetail = ({item})=>{
-    const [cantidad, setCantidad] = useState(0)
+    const [cantidad, setCantidad] = useState()
     const {image,marca,modelo,precio,stock,detalles,id} = item
     const {addItem} = useContext(CartContext);
 
@@ -18,7 +18,7 @@ export const ItemDetail = ({item})=>{
         modelo: modelo,
         precio: precio,
         image: image,
-        cantidad: cant
+        cantidad: cant,
         }
         setCantidad(cant)
         addItem(botinesCarrito)

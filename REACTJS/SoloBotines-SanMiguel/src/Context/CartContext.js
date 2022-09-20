@@ -7,19 +7,17 @@ const CartProvider = (props) => {
 
     const addItem = (botin) => {
         if(isInCart(botin.id)){
-            const cartAux = [...cart]
-            for (const producto of cartAux)  {
-                if(producto.id === botin.id){
-                    producto.botin.cantidad = producto.botin.cantidad + producto.botin.cantidad
-                    
+            const cartAux = cart.map(producto => {
+                if(producto.botin.id === botin.id){
+                    producto.botin.cantidad = producto.botin.cantidad + botin.cantidad
                 }
-            }
-            
+                return producto
+
+            })
             setCart(cartAux)
         }
             else{
             setCart([...cart,{botin}])
-            console.log(botin)
         }    
     }
 
