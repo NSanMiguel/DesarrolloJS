@@ -1,6 +1,7 @@
+import { getDoc,doc } from 'firebase/firestore';
+import db from '../../services/firebase';
 import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
-import { botinesData } from '../botinesData';
 import { ItemDetail } from '../ItemDetail/ItemDetail';
 
 export const ItemDetailContainer = () => {
@@ -8,16 +9,23 @@ export const ItemDetailContainer = () => {
     const [cargando, setCargando] = useState(true)
     const {id} = useParams()
 
+    const getSelected = async (idBotines) => {
+        try{
+            setCargando(true)
+            const document = doc(db,"Botines",idBotines)
+            const response = await getDoc(document)    
+            const result = {id: response.id, ...response.data()}
+            setBotines(result)
+            setCargando(false)
+        }catch(error){
+            console.log(error)
+        }
+    }
     useEffect(() => {
-        const getItem =  new Promise ((resolve,rej)=>{
-            setTimeout(()=> resolve(botinesData.find(botines => botines.id === Number(id)))
-            , 2000)  
-        }) 
-        getItem
-        .then(response => {setBotines(response) 
-            setCargando(false)})
-            .catch(error => console.error(error))
-    }, []);
+        getSelected(id)
+    },[id])
+
+
 
     return(
        cargando ? <h1> Cargando ... </h1> : <ItemDetail item={botin}/>

@@ -2,6 +2,7 @@ import React,{useContext} from 'react';
 import { CartContext } from '../../Context/CartContext';
 import { CardCart } from '../CardCart/CardCart';
 import { CartVacio } from './CartVacio/CartVacio';
+import { Link } from 'react-router-dom';
 
 export const Cart = () => {
     const {cart,getTotal,clearAll} = useContext(CartContext)
@@ -18,6 +19,9 @@ export const Cart = () => {
                  <h2> PRECIO TOTAL: $ {getTotal()}</h2>
                  <button className='botonEliminar'> Confirmar Compra</button>
                  <button className='botonEliminar' onClick={() => clearAll()}>Vaciar Carrito</button>
+                 <Link to="/">
+                <button className='botonEliminar'> Seguir comprando </button>
+                </Link>
                  </div>
              </div>
              </div>
