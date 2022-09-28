@@ -17,7 +17,9 @@ export const Cart = () => {
              <div className='card-container' style={{width: "50%"}}>
                  <div className='card-body'>
                  <h2> PRECIO TOTAL: $ {getTotal()}</h2>
+                 <Link to="/checkout">
                  <button className='botonEliminar'> Confirmar Compra</button>
+                 </Link>
                  <button className='botonEliminar' onClick={() => clearAll()}>Vaciar Carrito</button>
                  <Link to="/">
                 <button className='botonEliminar'> Seguir comprando </button>
